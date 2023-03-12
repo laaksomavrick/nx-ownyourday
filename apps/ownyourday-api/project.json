@@ -1,0 +1,64 @@
+{
+    "name": "ownyourday-api",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/ownyourday-api/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/webpack:webpack",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "target": "node",
+                "compiler": "tsc",
+                "outputPath": "dist/apps/ownyourday-api",
+                "main": "apps/ownyourday-api/src/main.ts",
+                "tsConfig": "apps/ownyourday-api/tsconfig.app.json",
+                "assets": ["apps/ownyourday-api/src/assets"],
+                "isolatedConfig": true,
+                "webpackConfig": "apps/ownyourday-api/webpack.config.js"
+            },
+            "configurations": {
+                "development": {},
+                "production": {}
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/js:node",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "ownyourday-api:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "ownyourday-api:build:development"
+                },
+                "production": {
+                    "buildTarget": "ownyourday-api:build:production"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/ownyourday-api/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/ownyourday-api/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        }
+    },
+    "tags": []
+}

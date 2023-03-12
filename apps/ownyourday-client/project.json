@@ -1,72 +1,75 @@
 {
-  "name": "ownyourday-client",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/ownyourday-client/src",
-  "projectType": "application",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/vite:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "dist/apps/ownyourday-client"
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
+    "name": "ownyourday-client",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/ownyourday-client/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/vite:build",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "outputPath": "dist/apps/ownyourday-client"
+            },
+            "configurations": {
+                "development": {
+                    "mode": "development"
+                },
+                "production": {
+                    "mode": "production"
+                }
+            }
         },
-        "production": {
-          "mode": "production"
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nrwl/vite:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "ownyourday-client:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "ownyourday-client:build:development",
-          "hmr": true
+        "serve": {
+            "executor": "@nrwl/vite:dev-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "ownyourday-client:build",
+                "proxyConfig": "apps/ownyourday-client/proxy.conf.json"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "ownyourday-client:build:development",
+                    "hmr": true
+                },
+                "production": {
+                    "buildTarget": "ownyourday-client:build:production",
+                    "hmr": false
+                }
+            }
         },
-        "production": {
-          "buildTarget": "ownyourday-client:build:production",
-          "hmr": false
-        }
-      }
-    },
-    "preview": {
-      "executor": "@nrwl/vite:preview-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "ownyourday-client:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "ownyourday-client:build:development"
+        "preview": {
+            "executor": "@nrwl/vite:preview-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "ownyourday-client:build"
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "ownyourday-client:build:development"
+                },
+                "production": {
+                    "buildTarget": "ownyourday-client:build:production"
+                }
+            }
         },
-        "production": {
-          "buildTarget": "ownyourday-client:build:production"
+        "test": {
+            "executor": "@nrwl/vite:test",
+            "outputs": ["coverage/apps/ownyourday-client"],
+            "options": {
+                "passWithNoTests": true,
+                "reportsDirectory": "../../coverage/apps/ownyourday-client"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "apps/ownyourday-client/**/*.{ts,tsx,js,jsx}"
+                ]
+            }
         }
-      }
     },
-    "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": ["coverage/apps/ownyourday-client"],
-      "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/ownyourday-client"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/ownyourday-client/**/*.{ts,tsx,js,jsx}"]
-      }
-    }
-  },
-  "tags": []
+    "tags": []
 }
