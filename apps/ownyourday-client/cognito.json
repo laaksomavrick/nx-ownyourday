@@ -1,0 +1,14 @@
+{
+    "clientId": "7nf2apv8hj3911daf8cnd1o7cj",
+    "userPoolUri": "ownyourday.auth.ca-central-1.amazoncognito.com",
+    "userPool": "ca-central-1_0vVa26dEm",
+    "region": "ca-central-1",
+    "callbackUri": "http://localhost:4200",
+    "signoutUri": "http://localhost:4200",
+    "tokenScopes": [
+        "openid",
+        "email",
+        "profile",
+        "aws.cognito.signin.user.admin"
+    ]
+}

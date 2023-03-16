@@ -39,3 +39,6 @@ testem.log
 Thumbs.db
 
 docker/
+
+# Temporary - ignore cognito credentials for the moment
+apps/ownyourday-client/cognito.json
