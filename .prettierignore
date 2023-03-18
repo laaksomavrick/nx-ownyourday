@@ -2,3 +2,5 @@
 
 /dist
 /coverage
+
+apps/ownyourday-client/vite.config.ts

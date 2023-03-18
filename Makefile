@@ -9,3 +9,11 @@ serve-api:
 .PHONY: serve-db
 serve-db:
 	@docker-compose -f docker-compose.local.yml up
+
+.PHONY: format
+format:
+	@npx nx format
+
+.PHONY: format-check
+format-check:
+	@npx nx format:check
