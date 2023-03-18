@@ -1,1 +1,1 @@
-export * from './GoogleSignInButton';
+export * from './google-sign-in-button';
