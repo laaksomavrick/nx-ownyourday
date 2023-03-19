@@ -5,7 +5,6 @@ import { useGetCurrentUser } from '../../hooks';
 import { Navigate } from 'react-router-dom';
 
 export const SignInPage: React.FC = () => {
-    // TODO: return redirect to main page if user is already signed in
     const { currentUser } = useGetCurrentUser();
 
     if (currentUser) {

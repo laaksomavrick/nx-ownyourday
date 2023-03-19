@@ -42,7 +42,7 @@ export function AppPage() {
     );
 }
 
-// TODO: rename routes
+// TODO: rename to AppRouter
 const AppSkeleton = () => {
     const { loading } = useGetCurrentUser();
 

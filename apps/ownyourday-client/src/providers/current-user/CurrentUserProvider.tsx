@@ -2,7 +2,6 @@ import { CognitoUser } from '@ownyourday/common';
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { useGetCognitoUser } from '../../hooks';
 
-// Need to handle loading state
 export interface CurrentUserState {
     currentUser: CognitoUser | null;
     loading: boolean;
