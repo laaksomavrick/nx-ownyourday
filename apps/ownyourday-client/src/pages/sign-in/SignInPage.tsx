@@ -1,8 +1,17 @@
 import { Box, Center, Flex, Spacer, Text } from '@chakra-ui/react';
 import { GoogleSignInButton } from '../../components';
+import React from 'react';
+import { useGetCurrentUser } from '../../hooks';
+import { Navigate } from 'react-router-dom';
 
 export const SignInPage: React.FC = () => {
     // TODO: return redirect to main page if user is already signed in
+    const { currentUser } = useGetCurrentUser();
+
+    if (currentUser) {
+        return <Navigate to="/today" />;
+    }
+
     return (
         <Flex alignItems="center" justifyContent="center" height="100vh">
             <Box
