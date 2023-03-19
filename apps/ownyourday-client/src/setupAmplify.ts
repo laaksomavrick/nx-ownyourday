@@ -1,6 +1,4 @@
 import { Amplify } from 'aws-amplify';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import cognito from '../cognito.json';
 
 Amplify.configure({

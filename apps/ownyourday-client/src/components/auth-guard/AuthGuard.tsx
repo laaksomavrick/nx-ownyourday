@@ -1,16 +1,21 @@
-import React, { PropsWithChildren } from 'react';
+import React, { useEffect } from 'react';
 import { useGetCurrentUser } from '../../hooks';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { SIGN_IN } from '../../routes';
 
-// TODO
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
+export interface AuthGuardProps {
+    children: JSX.Element;
+}
+
+export const AuthGuard = ({ children }: AuthGuardProps) => {
     const { currentUser } = useGetCurrentUser();
+    const navigate = useNavigate();
 
-    if (currentUser == null) {
-        return <Navigate to="/sign-in" />;
-    }
+    useEffect(() => {
+        if (currentUser == null) {
+            navigate(SIGN_IN);
+        }
+    }, [currentUser]);
 
     return children;
 };

@@ -40,5 +40,5 @@ Thumbs.db
 
 docker/
 
-# Temporary - ignore cognito credentials for the moment
+# Don't expose local development secrets for Cognito
 apps/ownyourday-client/cognito.json
