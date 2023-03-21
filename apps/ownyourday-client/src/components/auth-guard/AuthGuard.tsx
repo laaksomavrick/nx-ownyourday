@@ -11,6 +11,8 @@ export const AuthGuard = ({ children }: AuthGuardProps) => {
     const { currentUser } = useGetCurrentUser();
     const navigate = useNavigate();
 
+    // TODO: if is loading, return loading mask
+
     useEffect(() => {
         if (currentUser == null) {
             navigate(SIGN_IN);

@@ -17,3 +17,7 @@ format:
 .PHONY: format-check
 format-check:
 	@npx nx format:check
+
+.PHONY: test-client
+test-client:
+	@npx nx run ownyourday-client:test
