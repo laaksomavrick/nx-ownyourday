@@ -1,5 +1,5 @@
 import { useGetCurrentUser } from '../../hooks';
-import { LoadingIndicator } from '../loading-indicator';
+import { LoadingMask } from '../loading-mask';
 import {
     createBrowserRouter,
     Navigate,
@@ -33,7 +33,7 @@ export const AppRoutes = () => {
     const { loading } = useGetCurrentUser();
 
     if (loading) {
-        return <LoadingIndicator />;
+        return <LoadingMask />;
     }
 
     return <RouterProvider router={router} />;

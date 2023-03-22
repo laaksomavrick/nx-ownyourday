@@ -1,6 +1,6 @@
 import { CognitoUser } from '@ownyourday/common';
-import { createContext, PropsWithChildren, useEffect, useState } from 'react';
-import { useGetCognitoUser } from '../../hooks';
+import { createContext, PropsWithChildren } from 'react';
+import { useGetUserSession } from '../../hooks';
 
 export interface CurrentUserState {
     currentUser: CognitoUser | null;
@@ -14,17 +14,7 @@ export const CurrentUserContext = createContext<CurrentUserState>({
 export const UserContextProvider: React.FC<PropsWithChildren> = ({
     children,
 }) => {
-    const currentUser = useGetCognitoUser();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setLoading(false);
-    }, [currentUser]);
-
-    const value = {
-        currentUser,
-        loading,
-    };
+    const value = useGetUserSession();
 
     return (
         <CurrentUserContext.Provider value={value}>
