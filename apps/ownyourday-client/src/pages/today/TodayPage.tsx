@@ -1,3 +1,3 @@
 export const TodayPage: React.FC = () => {
-    return <p>today page</p>;
+    return <p data-testid="TodayPage">today page</p>;
 };

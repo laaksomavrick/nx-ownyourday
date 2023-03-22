@@ -6,6 +6,14 @@ import getCurrentUser from '../lib/getCurrentUser';
 export const useGetCognitoUser = () => {
     const [currentUser, setCurrentUser] = useState<CognitoUser | null>(null);
 
+    const onUserSignIn = (user: CognitoUser) => {
+        setCurrentUser(user);
+    };
+
+    const onUserSignOut = () => {
+        setCurrentUser(null);
+    };
+
     useEffect(() => {
         (async () => {
             Hub.listen('auth', async ({ payload: { event, data } }) => {
@@ -22,10 +30,10 @@ export const useGetCognitoUser = () => {
                             );
                             return;
                         }
-                        setCurrentUser(user);
+                        onUserSignIn(user);
                         break;
                     case 'signOut':
-                        setCurrentUser(null);
+                        onUserSignOut();
                         break;
                     case 'signIn_failure':
                     case 'cognitoHostedUI_failure':
@@ -42,7 +50,7 @@ export const useGetCognitoUser = () => {
                 return;
             }
 
-            setCurrentUser(user);
+            onUserSignIn(user);
         })();
     }, []);
 

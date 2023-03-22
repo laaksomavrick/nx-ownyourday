@@ -3,16 +3,22 @@ import { GoogleSignInButton } from '../../components';
 import React from 'react';
 import { useGetCurrentUser } from '../../hooks';
 import { Navigate } from 'react-router-dom';
+import { TODAY } from '../../routes';
 
 export const SignInPage: React.FC = () => {
     const { currentUser } = useGetCurrentUser();
 
     if (currentUser) {
-        return <Navigate to="/today" />;
+        return <Navigate to={TODAY} data-testid="NavigateToToday" />;
     }
 
     return (
-        <Flex alignItems="center" justifyContent="center" height="100vh">
+        <Flex
+            alignItems="center"
+            justifyContent="center"
+            height="100%"
+            data-testid="SignInPage"
+        >
             <Box
                 maxW="512px"
                 flex="1"
