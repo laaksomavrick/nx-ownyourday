@@ -1,0 +1,14 @@
+{
+    "clientId": "",
+    "userPoolUri": "",
+    "userPool": "",
+    "region": "",
+    "callbackUri": "http://localhost:4200",
+    "signoutUri": "http://localhost:4200",
+    "tokenScopes": [
+        "openid",
+        "email",
+        "profile",
+        "aws.cognito.signin.user.admin"
+    ]
+}

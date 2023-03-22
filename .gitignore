@@ -39,3 +39,6 @@ testem.log
 Thumbs.db
 
 docker/
+
+# Don't expose local development secrets for Cognito
+apps/ownyourday-client/cognito.json
