@@ -1,0 +1,45 @@
+name: Verify pull request
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Verify pull request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.0
+
+      - name: Install node dependencies
+        run: yarn install --immutable
+
+      - name: Check TypeScript formatting
+        run: yarn nx format:check --base=origin/main
+
+      - name: Check Terraform formatting
+        run: terraform fmt -recursive -check
+
+      - name: Validate Terraform
+        run: terraform validate -no-color
+
+      - name: Test
+        run: yarn nx affected --target=test --base=origin/main
+
+      - name: Copy cognito for build
+        run: |
+          cd apps/ownyourday-client
+          cp cognito.example.json cognito.json
+
+      - name: Build
+        run: yarn nx affected --target=build --base=origin/main
