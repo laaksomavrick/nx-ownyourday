@@ -1,17 +1,17 @@
 variable "google_idp_client_id" {
-    type = string
+  type = string
 }
 
 variable "google_idp_client_secret" {
-    type = string
+  type = string
 }
 
-variable "client_callback_urls" {
-    type = list(string)
-    default = ["http://localhost:4200"]
+variable "google_client_callback_urls" {
+  type    = list(string)
+  default = ["http://localhost:4200"]
 }
 
-variable "client_logout_urls" {
-    type = list(string)
-    default = ["http://localhost:4200"]
+variable "google_client_logout_urls" {
+  type    = list(string)
+  default = ["http://localhost:4200"]
 }
