@@ -12,7 +12,7 @@ serve-db:
 
 .PHONY: format
 format:
-	@npx nx format
+	@npx nx format && terraform fmt -recursive
 
 .PHONY: format-check
 format-check:

@@ -42,3 +42,17 @@ docker/
 
 # Don't expose local development secrets for Cognito
 apps/ownyourday-client/cognito.json
+
+# Terraform
+# .tfstate files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+backend.conf
+.terraform
+.terraform.lock.hcl
