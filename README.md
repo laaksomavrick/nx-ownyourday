@@ -24,8 +24,8 @@ A diagram is generated via script in the `tools/diagram` subdirectory:
 
 Ownyourday is built with an `nx` monorepo. Hence, you'll need:
 
-* `node >= 18`
-* `yarn`
+- `node >= 18`
+- `yarn`
 
 ## Project setup
 
@@ -36,5 +36,3 @@ TODO
 ### Operating
 
 TODO
-
-
