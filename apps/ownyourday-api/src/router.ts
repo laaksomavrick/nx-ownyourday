@@ -1,21 +1,19 @@
-import express from "express";
+import express from 'express';
+import { authorizationMiddleware } from './authorization';
 
-const router = express.Router()
+const router = express.Router();
 
 // Public routes
 
 router.get('/hello', (req, res) => {
-    res.send({message: 'hello, world'})
-})
-router.use((req, res, next) => {
-    // TODO: validate jwt
-    // https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html
-   next();
-})
+    res.send({ message: 'hello, world' });
+});
+
+router.use(authorizationMiddleware);
 
 // Private routes
-router.get('/hello', (req, res) => {
-    res.send({message: 'hello, world'})
-})
+router.get('/privatehello', (req, res) => {
+    res.send({ message: 'hello, world from private' });
+});
 
 export default router;

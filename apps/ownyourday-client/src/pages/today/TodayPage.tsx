@@ -1,39 +1,44 @@
-import {useQuery, useQueryClient} from "@tanstack/react-query";
-import {Box} from "@chakra-ui/react";
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Box } from '@chakra-ui/react';
 
-export const getBase = () => process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
-export const getHeaders = (token: string | undefined) => ({ Authorization: `Bearer ${token}` });
+export const getBase = () => 'http://localhost:3000/api';
+export const getHeaders = (token: string | undefined) => ({
+    Authorization: `Bearer ${token}`,
+});
 
 const fetchHello = async () => {
     const base = getBase();
-    const result = await fetch(`${base}/hello`)
+    const result = await fetch(`${base}/hello`);
     return result.json();
-}
+};
 
 const fetchPrivateHello = async () => {
-    const token = 'todo'
+    const token = 'todo';
     const base = getBase();
     const result = await fetch(`${base}/privatehello`, {
-        headers: { ...getHeaders(token) }
+        headers: { Authorization: `Bearer ${token}` },
     });
     return result.json();
-}
+};
 
 export const TodayPage: React.FC = () => {
-    const { isLoading, error, data } = useQuery({
+    const { data: helloData } = useQuery({
         queryKey: ['hello'],
-        queryFn: fetchHello
-    })
+        queryFn: fetchHello,
+    });
 
-    if (error) return 'An error has occurred: '
+    const { data: privateHelloData } = useQuery({
+        queryKey: ['privatehello'],
+        queryFn: fetchPrivateHello,
+    });
 
     return (
         <Box>
             <p data-testid="TodayPage">today page</p>
             <p>
-                {isLoading ? "Loading..." : data.message}
+                {helloData?.message}
+                {privateHelloData?.message}
             </p>
         </Box>
-        )
-        ;
+    );
 };

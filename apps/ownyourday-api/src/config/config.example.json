@@ -1,0 +1,10 @@
+{
+    "env": "development",
+    "port": 3000,
+    "aws": {
+        "cognito": {
+            "userPoolId": "",
+            "clientId": ""
+        }
+    }
+}
