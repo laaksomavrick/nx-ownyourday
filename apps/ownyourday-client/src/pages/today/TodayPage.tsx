@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Box } from '@chakra-ui/react';
+import { useGetCurrentUser } from '../../hooks';
 
 export const getBase = () => 'http://localhost:3000/api';
 export const getHeaders = (token: string | undefined) => ({
@@ -12,13 +13,27 @@ const fetchHello = async () => {
     return result.json();
 };
 
-const fetchPrivateHello = async () => {
-    const token = 'todo';
+const fetchPrivateHello = (token: string) => async () => {
     const base = getBase();
     const result = await fetch(`${base}/privatehello`, {
         headers: { Authorization: `Bearer ${token}` },
     });
     return result.json();
+};
+
+const useGetPrivateHello = () => {
+    const { currentUser } = useGetCurrentUser();
+
+    if (currentUser == null) {
+        throw new Error('Current user cannot be null');
+    }
+
+    const token = currentUser?.jwt;
+
+    return useQuery({
+        queryKey: ['privatehello'],
+        queryFn: fetchPrivateHello(token),
+    });
 };
 
 export const TodayPage: React.FC = () => {
@@ -27,10 +42,7 @@ export const TodayPage: React.FC = () => {
         queryFn: fetchHello,
     });
 
-    const { data: privateHelloData } = useQuery({
-        queryKey: ['privatehello'],
-        queryFn: fetchPrivateHello,
-    });
+    const { data: privateHelloData } = useGetPrivateHello();
 
     return (
         <Box>

@@ -1,3 +1,6 @@
 export interface CognitoUser {
-    email: string;
+    user: {
+        email: string;
+    };
+    jwt: string;
 }

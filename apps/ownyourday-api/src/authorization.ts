@@ -18,7 +18,8 @@ const verifier = verifierFactory();
 
 const authorizationMiddleware = async (req, res, next) => {
     try {
-        const authHeader = req.headers['Authorization'];
+        const authHeader =
+            req.headers['Authorization'] || req.headers['authorization'];
         const [_, token] = authHeader.split('Bearer ');
 
         await verifier.verify(token);

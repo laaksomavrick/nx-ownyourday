@@ -1,11 +1,20 @@
 import { Auth } from 'aws-amplify';
 import { CognitoUser } from '@ownyourday/common';
+import { get } from 'lodash';
 
 const getCurrentUser = async (): Promise<CognitoUser | null> => {
     try {
         const data = await Auth.currentSession();
+        const accessToken = data.getAccessToken();
         const idToken = data.getIdToken();
-        return idToken.payload as CognitoUser;
+        const user = idToken.payload;
+        const jwt = accessToken.getJwtToken();
+        return {
+            user: {
+                email: user.email,
+            },
+            jwt,
+        };
     } catch (e) {
         return null;
     }
