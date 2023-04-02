@@ -1,7 +1,7 @@
-import { useGetCognitoUser } from './useGetCognitoUser';
 import { useEffect, useState } from 'react';
+import { useGetCognitoUser } from './index';
 
-export const useGetUserSession = () => {
+const useGetUserSession = () => {
     const currentUser = useGetCognitoUser();
     const [loading, setLoading] = useState(true);
 
@@ -16,3 +16,5 @@ export const useGetUserSession = () => {
 
     return value;
 };
+
+export default useGetUserSession;

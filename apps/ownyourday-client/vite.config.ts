@@ -24,6 +24,12 @@ export default defineConfig({
         }),
     ],
 
+    resolve: {
+        alias: {
+            './runtimeConfig': './runtimeConfig.browser',
+        },
+    },
+
     // Uncomment this if you are using workers.
     // worker: {
     //  plugins: [

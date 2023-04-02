@@ -1,11 +1,13 @@
 const mockUseGetCognitoUser = vi.fn();
 
-vi.mock('./useGetCognitoUser', () => ({
+vi.mock('./index', () => ({
     useGetCognitoUser: mockUseGetCognitoUser,
 }));
 
+// eslint-disable-next-line import/first
 import { renderHook } from '@testing-library/react';
-import { useGetUserSession } from './useGetUserSession';
+// eslint-disable-next-line import/first
+import useGetUserSession from './useGetUserSession';
 
 describe('useGetUserSession', () => {
     afterEach(() => {

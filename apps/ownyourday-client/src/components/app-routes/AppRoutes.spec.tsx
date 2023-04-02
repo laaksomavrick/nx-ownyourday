@@ -4,8 +4,11 @@ import { render } from '@testing-library/react';
 import { InitialEntry } from '@remix-run/router';
 import { SIGN_IN, TODAY } from '../../routes';
 import { CurrentUserContext, CurrentUserState } from '../../providers';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 describe('AppRoutes', () => {
+    const queryClient = new QueryClient();
+
     const getWrapper =
         ({
             initialEntries,
@@ -16,11 +19,13 @@ describe('AppRoutes', () => {
         }) =>
         ({ children }: any) =>
             (
-                <MemoryRouter initialEntries={initialEntries}>
-                    <CurrentUserContext.Provider value={currentUserValue}>
-                        {children}
-                    </CurrentUserContext.Provider>
-                </MemoryRouter>
+                <QueryClientProvider client={queryClient}>
+                    <MemoryRouter initialEntries={initialEntries}>
+                        <CurrentUserContext.Provider value={currentUserValue}>
+                            {children}
+                        </CurrentUserContext.Provider>
+                    </MemoryRouter>
+                </QueryClientProvider>
             );
 
     it('shows a loading mask when current user retrieval is loading', () => {
@@ -39,7 +44,10 @@ describe('AppRoutes', () => {
             initialEntries: [TODAY],
             currentUserValue: {
                 currentUser: {
-                    email: 'foo@example.com',
+                    user: {
+                        email: 'foo@example.com',
+                    },
+                    jwt: '',
                 },
                 loading: false,
             },

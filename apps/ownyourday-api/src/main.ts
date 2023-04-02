@@ -1,8 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import config from './config';
 import router from './router';
+import config from './config';
+import { errorHandlingMiddleware } from './middleware';
 
 const app = express();
 
@@ -12,13 +13,9 @@ app.use(cors());
 
 app.use('/api', router);
 
-app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500;
-    const message = err.message || 'Oops! Something went wrong';
-    res.status(statusCode).send(message);
-});
+app.use(errorHandlingMiddleware);
 
 const port = config.get('port');
-const server = app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
 });
