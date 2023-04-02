@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { CognitoUser } from '@ownyourday/common';
 import { Hub } from 'aws-amplify';
-import getCurrentUser from '../lib/getCurrentUser';
+import { getCurrentUser } from '../lib';
 
-export const useGetCognitoUser = () => {
+const useGetCognitoUser = () => {
     const [currentUser, setCurrentUser] = useState<CognitoUser | null>(null);
 
     const onUserSignIn = (user: CognitoUser) => {
@@ -56,3 +56,5 @@ export const useGetCognitoUser = () => {
 
     return currentUser;
 };
+
+export default useGetCognitoUser;

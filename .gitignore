@@ -56,3 +56,6 @@ override.tf.json
 backend.conf
 .terraform
 .terraform.lock.hcl
+
+## api secrets
+apps/ownyourday-api/src/config/config.development.json

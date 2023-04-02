@@ -14,7 +14,7 @@
                 "outputPath": "dist/apps/ownyourday-api",
                 "main": "apps/ownyourday-api/src/main.ts",
                 "tsConfig": "apps/ownyourday-api/tsconfig.app.json",
-                "assets": ["apps/ownyourday-api/src/assets"],
+                "assets": ["apps/ownyourday-api/src/config"],
                 "isolatedConfig": true,
                 "webpackConfig": "apps/ownyourday-api/webpack.config.js"
             },

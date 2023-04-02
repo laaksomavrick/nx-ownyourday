@@ -1,3 +1,17 @@
+import { Box } from '@chakra-ui/react';
+import { useGetHello, useGetPrivateHello } from '../../hooks';
+
 export const TodayPage: React.FC = () => {
-    return <p data-testid="TodayPage">today page</p>;
+    const { data: helloData } = useGetHello();
+    const { data: privateHelloData } = useGetPrivateHello();
+
+    return (
+        <Box>
+            <p data-testid="TodayPage">today page</p>
+            <p>
+                {helloData?.message}
+                {privateHelloData?.message}
+            </p>
+        </Box>
+    );
 };
